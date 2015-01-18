@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">PriorityRouting</string>
+    <string name="app_name">Priority Routing</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_address">AddressActivity</string>
+    <string name="title_activity_map">MapActivity</string>
 
 </resources>
