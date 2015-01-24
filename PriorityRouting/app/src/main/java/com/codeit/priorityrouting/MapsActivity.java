@@ -65,12 +65,12 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker").snippet("Snippet"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
-        //Enable MyLocation Layer on Google Map
+        //Enable MyLocation Layer of Google Map
         mMap.setMyLocationEnabled(true);
 
-        //Get LocationManager object from System Service LOCATION_SERVICE
+        //Get LocationManager object System Service LOCATION_SERVICE
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         //Create a criteria object to retrieve provider
@@ -82,23 +82,23 @@ public class MapsActivity extends FragmentActivity {
         //Get Current Location
         Location myLocation = locationManager.getLastKnownLocation(provider);
 
-        //set map type
+        //Set map type ---------
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //Get latitude of the current location
-        double latitude = myLocation.getLatitude();
+//        double latitude = myLocation.getLatitude();
 
         //Get longitude of the current location
-        double longitude = myLocation.getLongitude();
+//        double longitude = myLocation.getLongitude();
 
         //Create a LatLng object for the current location
-        LatLng latLng = new LatLng(latitude, longitude);
+//        LatLng latLng = new LatLng(latitude, longitude);
 
         //Show the current location in Google Map
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         //Zoom in the Google Map
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!").snippet("Consider yourself located"));
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!"));
     }
 }
