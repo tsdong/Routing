@@ -1,9 +1,12 @@
 package com.codeit.priorityrouting;
 
 import android.content.Context;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -12,6 +15,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity {
 
@@ -65,7 +71,7 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker").snippet("Snippet"));
 
         //Enable MyLocation Layer of Google Map
         mMap.setMyLocationEnabled(true);
@@ -86,19 +92,19 @@ public class MapsActivity extends FragmentActivity {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //Get latitude of the current location
-//        double latitude = myLocation.getLatitude();
+        double latitude = myLocation.getLatitude();
 
         //Get longitude of the current location
-//        double longitude = myLocation.getLongitude();
+        double longitude = myLocation.getLongitude();
 
         //Create a LatLng object for the current location
-//        LatLng latLng = new LatLng(latitude, longitude);
+        LatLng latLng = new LatLng(latitude, longitude);
 
         //Show the current location in Google Map
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         //Zoom in the Google Map
-//        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
-//        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!"));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!").snippet("You have been located."));
     }
 }

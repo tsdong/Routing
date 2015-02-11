@@ -7,10 +7,9 @@
     <string name="title_activity_address">AddressActivity</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_maps">Map</string>
-    <!--
-        <string name="find">Find</string>
+    <string name="find">Find</string>
     <string name="hint">Enter Place</string>
-    -->
     <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="title_activity_maps_activity2">Map</string>
 
 </resources>
