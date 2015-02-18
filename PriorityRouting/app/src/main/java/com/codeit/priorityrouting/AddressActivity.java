@@ -1,12 +1,19 @@
 package com.codeit.priorityrouting;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+
+import java.util.ArrayList;
 
 
 public class AddressActivity extends ActionBarActivity {
@@ -16,7 +23,7 @@ public class AddressActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
 
-        final Button mapButton = (Button) findViewById(R.id.startMap);
+        final Button mapButton = (Button) findViewById(R.id.btn_route);
         mapButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Intent i = new Intent(AddressActivity.this, MapsActivity.class);
@@ -24,7 +31,6 @@ public class AddressActivity extends ActionBarActivity {
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -77,6 +77,7 @@ public class MapsActivity extends FragmentActivity {
         mMap.setMyLocationEnabled(true);
 
         //Get LocationManager object System Service LOCATION_SERVICE
+
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         //Create a criteria object to retrieve provider
