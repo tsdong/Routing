@@ -10,6 +10,7 @@
     <string name="find">Add</string>
     <string name="hint">Enter Place</string>
     <string name="title_activity_registration">Priority Routing</string>
+    <string name="title_activity_login2">Priority Routing</string>
     <string name="action_search">Search</string>
     <string name="route">Map It</string>
 

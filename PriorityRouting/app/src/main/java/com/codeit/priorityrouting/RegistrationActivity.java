@@ -1,9 +1,12 @@
 package com.codeit.priorityrouting;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class RegistrationActivity extends ActionBarActivity {
@@ -12,6 +15,22 @@ public class RegistrationActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        final Button btnSubmit = (Button) findViewById(R.id.email_sign_in_button);
+        btnSubmit.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
+                startActivity(i);
+            }
+        });
+
+        final Button btnCancel = (Button) findViewById(R.id.email_sign_in_button_2);
+        btnCancel.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
 
