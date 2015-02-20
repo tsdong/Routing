@@ -43,7 +43,6 @@ public class c3PoService{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
             connection.close();
 
 
