@@ -1,5 +1,8 @@
 package com.codeit.priorityrouting;
 
+import android.graphics.Color;
+
+
 import android.content.Context;
 import android.location.Address;
 import android.location.Criteria;
@@ -14,12 +17,17 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity {
+    private static final LatLng LOWER_MANHATTAN = new LatLng(40.722543, -73.998585);
+    private static final LatLng TIMES_SQUARE = new LatLng(40.7577, -73.9857);
+    private static final LatLng BROOKLYN_BRIDGE = new LatLng(40.7057, -73.9964);
+
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
@@ -71,28 +79,30 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
+        mMap.addPolyline((new PolylineOptions()).add(TIMES_SQUARE, BROOKLYN_BRIDGE, LOWER_MANHATTAN, TIMES_SQUARE).width(5).color(Color.BLUE).geodesic(true));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOWER_MANHATTAN, 13));
         //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker").snippet("Snippet"));
 
         //Enable MyLocation Layer of Google Map
-        mMap.setMyLocationEnabled(true);
+//        mMap.setMyLocationEnabled(true);
 
         //Get LocationManager object System Service LOCATION_SERVICE
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         //Create a criteria object to retrieve provider
-        Criteria criteria = new Criteria();
+//        Criteria criteria = new Criteria();
 
         //Get the name of the best provider
-        String provider = locationManager.getBestProvider(criteria, true);
+//        String provider = locationManager.getBestProvider(criteria, true);
 
         //Get Current Location
-        Location myLocation = locationManager.getLastKnownLocation(provider);
+//        Location myLocation = locationManager.getLastKnownLocation(provider);
 
         //Set map type ---------
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        //Get latitude of the current location
+        /* Get latitude of the current location
         double latitude = myLocation.getLatitude();
 
         //Get longitude of the current location
@@ -107,5 +117,6 @@ public class MapsActivity extends FragmentActivity {
         //Zoom in the Google Map
         mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
         mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!").snippet("You have been located."));
+    */
     }
 }
