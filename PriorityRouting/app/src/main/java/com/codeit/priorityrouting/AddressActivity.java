@@ -10,16 +10,45 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 
 public class AddressActivity extends ActionBarActivity {
+/*******
+    ArrayAdapter<String> m_adapter;
+    ArrayList<String> m_listItems = new ArrayList<String>();
+
+    Button btnAdd;
+    EditText et;
+    TextView tv;
+    ListView lv;
+*******/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
+
+/***************
+        btnAdd = (Button) findViewById(R.id.btn_add);
+        et = (EditText) findViewById(R.id.et_place);
+        lv = (ListView) findViewById(R.id.addressListView);
+
+        m_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, m_listItems);
+        lv.setAdapter(m_adapter);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String input = et.getText().toString();
+                if(null != input && input.length() >0) {
+                    m_listItems.add(input);
+                    m_adapter.notifyDataSetChanged();
+                }
+            }
+        });
+**************/
 
         final Button mapButton = (Button) findViewById(R.id.btn_route);
         mapButton.setOnClickListener(new View.OnClickListener(){

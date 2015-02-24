@@ -60,7 +60,8 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan">
+            android:label="@string/title_activity_maps"
+            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan">
         </activity>
         <activity
             android:name=".LoginActivity"
