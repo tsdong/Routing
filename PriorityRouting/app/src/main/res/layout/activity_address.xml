@@ -22,7 +22,9 @@
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/find"
+        android:text="@string/addAddress"
+
+        android:textColor="@color/teal"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/addEntry" />
 
@@ -31,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/route"
+        android:textColor="@color/teal"
         android:layout_below="@+id/addressListView"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
@@ -40,6 +43,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint"
+        android:textColor="@color/teal"
+        android:textColorHint="@color/teal"
         android:inputType="text"
         android:layout_toLeftOf="@id/btn_add"
         android:layout_alignBottom="@+id/btn_add"
@@ -52,7 +57,7 @@
         android:layout_below="@+id/et_place"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true" >
-        <ExpandableListView
+        <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

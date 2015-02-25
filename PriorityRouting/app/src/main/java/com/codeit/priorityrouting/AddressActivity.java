@@ -1,5 +1,6 @@
 package com.codeit.priorityrouting;
 
+import android.app.ExpandableListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,46 +10,48 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
 public class AddressActivity extends ActionBarActivity {
-/*******
-    ArrayAdapter<String> m_adapter;
-    ArrayList<String> m_listItems = new ArrayList<String>();
 
     Button btnAdd;
+    ArrayList<String> addArray = new ArrayList<String>();
     EditText et;
-    TextView tv;
     ListView lv;
-*******/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
 
-/***************
-        btnAdd = (Button) findViewById(R.id.btn_add);
         et = (EditText) findViewById(R.id.et_place);
         lv = (ListView) findViewById(R.id.addressListView);
-
-        m_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, m_listItems);
-        lv.setAdapter(m_adapter);
-
+        btnAdd = (Button) findViewById(R.id.btn_add);
         btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                String input = et.getText().toString();
-                if(null != input && input.length() >0) {
-                    m_listItems.add(input);
-                    m_adapter.notifyDataSetChanged();
+                String getInput = et.getText().toString();
+
+                if(addArray.contains(getInput)){
+                    Toast.makeText(getBaseContext(), "Address already exists list", Toast.LENGTH_LONG);
+                }
+                else if(getInput == null || getInput.trim().equals("")){
+                    Toast.makeText(getBaseContext(), "Address entry is empty.", Toast.LENGTH_LONG);
+                }
+                else{
+                    addArray.add(getInput);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddressActivity.this, android.R.layout.simple_list_item_1, addArray);
+                    lv.setAdapter(adapter);
+                    ((TextView) findViewById(R.id.addEntry)).setText("");
                 }
             }
         });
-**************/
 
         final Button mapButton = (Button) findViewById(R.id.btn_route);
         mapButton.setOnClickListener(new View.OnClickListener(){
