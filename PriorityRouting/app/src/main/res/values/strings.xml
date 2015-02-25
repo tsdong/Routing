@@ -9,6 +9,7 @@
     <string name="title_activity_maps">Priority Routing</string>
     <string name="find">Find</string>
     <string name="hint">Enter Place</string>
+    <string name="route">Map It</string>
     <string name="title_activity_registration">Priority Routing</string>
 
 </resources>
