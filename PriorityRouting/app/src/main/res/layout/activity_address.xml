@@ -10,6 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:text="Address Entry"
         android:textSize="40sp"
         android:textColor="@color/gray86"
@@ -18,20 +19,21 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go to Maps"
-        android:id="@+id/startMap"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/btn_show"
+        android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/find"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_below="@+id/addEntry" />
+
+    <Button
+        android:id="@+id/btn_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/route"
+        android:layout_below="@+id/addressListView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
 
     <EditText
         android:id="@+id/et_place"
@@ -39,7 +41,24 @@
         android:layout_height="wrap_content"
         android:hint="@string/hint"
         android:inputType="text"
-        android:layout_toLeftOf="@id/btn_show"
-        android:layout_alignParentBottom="true" />
+        android:layout_toLeftOf="@id/btn_add"
+        android:layout_alignBottom="@+id/btn_add"
+        android:layout_below="@+id/addEntry" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/btn_route"
+        android:layout_below="@+id/et_place"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true" >
+        <ExpandableListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:divider="#0099CC"
+            android:dividerHeight="4px"
+            android:id="@+id/addressListView" />
+     </FrameLayout>
 
 </RelativeLayout>
