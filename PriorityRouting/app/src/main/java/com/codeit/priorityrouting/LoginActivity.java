@@ -37,12 +37,31 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_maps);
 
         //Login button
         final Button loginBtn = (Button) findViewById(R.id.sign_in_button);
         loginBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Intent i = new Intent(LoginActivity.this, AddressActivity.class);
+                startActivity(i);
+            }
+        });
+
+        //Back button on the map page
+        final Button backBtn = (Button) findViewById(R.id.back_btn);
+        backBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this, AddressActivity.class);
+                startActivity(i);
+            }
+        });
+
+        //Logout button on the map page
+        final Button logoutBtn = (Button) findViewById(R.id.logout_btn);
+        logoutBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this, LoginActivity.class);
                 startActivity(i);
             }
         });
