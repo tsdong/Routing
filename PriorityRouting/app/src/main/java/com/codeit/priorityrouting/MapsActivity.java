@@ -112,8 +112,12 @@ public class MapsActivity extends FragmentActivity {
         }
     }
 
+
     private class ReadTask extends AsyncTask<String, Void, String> {
 
+        /**
+         * set up an http connection
+         */
         protected String doInBackground(String... url) {
             String data = "";
             try {
@@ -126,6 +130,10 @@ public class MapsActivity extends FragmentActivity {
         }
 
 
+        /**
+         * call parsertask
+         * @param result
+         */
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             new ParserTask().execute(result);
@@ -136,6 +144,11 @@ public class MapsActivity extends FragmentActivity {
     private class ParserTask extends AsyncTask<String,Integer,List> {
 
 
+        /**
+         *should be creating paths
+         * @param jsonData
+         * @return
+         */
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
 
             JSONObject jObject;
@@ -152,6 +165,10 @@ public class MapsActivity extends FragmentActivity {
 
         }
 
+        /**
+         * should be drawing the paths
+         * @param routes
+         */
         protected void onPostExecute(List<List<HashMap<String, String>>> routes) {
             ArrayList<LatLng> points = null;
             PolylineOptions polyLineOptions = null;
