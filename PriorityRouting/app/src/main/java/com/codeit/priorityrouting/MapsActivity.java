@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity {
+
     private static final LatLng LOWER_MANHATTAN = new LatLng(40.722543, -73.998585);
     private static final LatLng TIMES_SQUARE = new LatLng(40.7577, -73.9857);
     private static final LatLng BROOKLYN_BRIDGE = new LatLng(40.7057, -73.9964);
@@ -44,7 +45,10 @@ public class MapsActivity extends FragmentActivity {
         ReadTask downloadTask = new ReadTask();
         downloadTask.execute(url);
 
-        setUpMapIfNeeded();
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BROOKLYN_BRIDGE,
+
+        				13));
+        addMarkers();
     }
 
     @Override
@@ -83,7 +87,7 @@ public class MapsActivity extends FragmentActivity {
 
     /**
      * this sets up the URL request using the given coordinates
-     * @return
+     *
      */
     private String getMapsApiDirectionsUrl(){
         String waypoints = "waypoints=optimize:true" + LOWER_MANHATTAN.latitude + "," + LOWER_MANHATTAN.longitude + "|" + "|" + BROOKLYN_BRIDGE.latitude +
@@ -109,7 +113,7 @@ public class MapsActivity extends FragmentActivity {
     }
 
     private class ReadTask extends AsyncTask<String, Void, String> {
-        @Override
+
         protected String doInBackground(String... url) {
             String data = "";
             try {
@@ -121,16 +125,17 @@ public class MapsActivity extends FragmentActivity {
             return data;
         }
 
-        @Override
+
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             new ParserTask().execute(result);
         }
     }
 
-    private class ParserTask extends AsyncTask<String, Integer, List> {
 
-        @Override
+    private class ParserTask extends AsyncTask<String,Integer,List> {
+
+
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
 
             JSONObject jObject;
@@ -144,19 +149,18 @@ public class MapsActivity extends FragmentActivity {
                 e.printStackTrace();
             }
             return routes;
+
         }
 
-        //@Override
         protected void onPostExecute(List<List<HashMap<String, String>>> routes) {
             ArrayList<LatLng> points = null;
             PolylineOptions polyLineOptions = null;
 
-            // traversing through routes
+            //traversing through routes
             for (int i = 0; i < routes.size(); i++) {
                 points = new ArrayList<LatLng>();
                 polyLineOptions = new PolylineOptions();
                 List<HashMap<String, String>> path = routes.get(i);
-
                 for (int j = 0; j < path.size(); j++) {
                     HashMap<String, String> point = path.get(j);
 
@@ -174,8 +178,8 @@ public class MapsActivity extends FragmentActivity {
 
             mMap.addPolyline(polyLineOptions);
         }
-
     }
+
 
     /**
      * This is where we can add markers or lines, add listeners or move the camera. In this case, we
