@@ -61,7 +61,7 @@ public class MapsActivity extends FragmentActivity {
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
-     * call {@link #setUpMap()} once when {@link #mMap} is not null.
+     * call  once when {@link #mMap} is not null.
      * <p/>
      * If it isn't installed {@link SupportMapFragment} (and
      * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
@@ -114,11 +114,13 @@ public class MapsActivity extends FragmentActivity {
     }
 
 
+
     private class ReadTask extends AsyncTask<String, Void, String> {
 
         /**
          * set up an http connection
          */
+        @Override
         protected String doInBackground(String... url) {
             String data = "";
             try {
@@ -135,6 +137,7 @@ public class MapsActivity extends FragmentActivity {
          * call parsertask
          * @param result
          */
+        @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             new ParserTask().execute(result);
@@ -142,7 +145,7 @@ public class MapsActivity extends FragmentActivity {
     }
 
 
-    private class ParserTask extends AsyncTask<String,Integer,List> {
+    private class ParserTask extends AsyncTask<String,Integer,List<List<HashMap<String, String>>>> {
 
 
         /**
@@ -150,6 +153,7 @@ public class MapsActivity extends FragmentActivity {
          * @param jsonData
          * @return
          */
+        @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
 
             JSONObject jObject;
@@ -162,6 +166,7 @@ public class MapsActivity extends FragmentActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             return routes;
 
         }
@@ -170,15 +175,17 @@ public class MapsActivity extends FragmentActivity {
          * should be drawing the paths
          * @param routes
          */
+        @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> routes) {
             ArrayList<LatLng> points = null;
             PolylineOptions polyLineOptions = null;
 
-            //traversing through routes
+            // traversing through routes
             for (int i = 0; i < routes.size(); i++) {
                 points = new ArrayList<LatLng>();
                 polyLineOptions = new PolylineOptions();
                 List<HashMap<String, String>> path = routes.get(i);
+
                 for (int j = 0; j < path.size(); j++) {
                     HashMap<String, String> point = path.get(j);
 
