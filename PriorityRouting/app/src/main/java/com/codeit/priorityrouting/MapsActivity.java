@@ -202,7 +202,7 @@ public class MapsActivity extends FragmentActivity {
     /**
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-
+/*
     private void setUpMap() {
         mMap.addPolyline((new PolylineOptions()).add(TIMES_SQUARE, BROOKLYN_BRIDGE, LOWER_MANHATTAN, TIMES_SQUARE).width(5).color(Color.BLUE).geodesic(true));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOWER_MANHATTAN, 13));
@@ -226,21 +226,22 @@ public class MapsActivity extends FragmentActivity {
         //Set map type ---------
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        /* Get latitude of the current location
-        double latitude = myLocation.getLatitude();
+        Get latitude of the current location
+//        double latitude = myLocation.getLatitude();
 
         //Get longitude of the current location
-        double longitude = myLocation.getLongitude();
+//        double longitude = myLocation.getLongitude();
 
         //Create a LatLng object for the current location
-        LatLng latLng = new LatLng(latitude, longitude);
+//        LatLng latLng = new LatLng(latitude, longitude);
 
         //Show the current location in Google Map
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         //Zoom in the Google Map
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!").snippet("You have been located."));
-    */
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!").snippet("You have been located."));
+
     }
+*/
 }

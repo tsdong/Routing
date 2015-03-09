@@ -4,5 +4,4 @@
     android:layout_height="match_parent"
     android:id="@+id/map"
     tools:context="com.codeit.priorityrouting.MapsActivity"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_below="@+id/logout_btn" />
+    android:name="com.google.android.gms.maps.SupportMapFragment"/>
