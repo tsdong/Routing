@@ -200,7 +200,7 @@ public class MapsActivity extends FragmentActivity {
                 }
 
                 polyLineOptions.addAll(points);
-                polyLineOptions.width(2);
+                polyLineOptions.width(8);
                 polyLineOptions.color(Color.BLUE);
             }
 
