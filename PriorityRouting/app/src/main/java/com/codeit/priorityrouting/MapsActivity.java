@@ -91,12 +91,12 @@ public class MapsActivity extends FragmentActivity {
      *
      */
     private String getMapsApiDirectionsUrl(){
-        String waypoints = "waypoints=optimize:true|" + LOWER_MANHATTAN.latitude + "," + LOWER_MANHATTAN.longitude + "|" + BROOKLYN_BRIDGE.latitude +
+        String waypoints = LOWER_MANHATTAN.latitude + "," + LOWER_MANHATTAN.longitude + "|" + BROOKLYN_BRIDGE.latitude +
                 "," + BROOKLYN_BRIDGE.longitude + "|" + TIMES_SQUARE.latitude + "," + TIMES_SQUARE.longitude;
 
 
-        String params = waypoints;
-        String origin = "40.74257499754292,-73.99208843708038";
+        String params = "waypoints=optimize:true|" + waypoints;
+        String origin = "Brooklyn,NY";
         String destination = "40.783141078983206,-73.97972881793976";
         String output = "json";
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?origin=" + origin + "&destination=" + destination + "&" + params;
