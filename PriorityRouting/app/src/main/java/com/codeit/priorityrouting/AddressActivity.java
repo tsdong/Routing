@@ -35,9 +35,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+
 
 public class AddressActivity extends ActionBarActivity {
-
 
     Button btnAdd;
     ArrayList<String> addArray = new ArrayList<String>();
@@ -79,7 +82,18 @@ public class AddressActivity extends ActionBarActivity {
                 startActivity(i);
             }
         });
+
+        //back button on the address entry page.
+        final Button backBtn = (Button) findViewById(R.id.back_button);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(AddressActivity.this, HomeActivity.class);
+                startActivity(i);
+            }
+        });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

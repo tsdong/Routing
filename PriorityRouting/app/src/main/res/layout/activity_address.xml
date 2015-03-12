@@ -10,13 +10,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:text="Address Entry"
-        android:textSize="40sp"
+        android:textSize="27sp"
         android:textColor="@color/gray86"
         android:id="@+id/addEntry"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignBottom="@+id/back_button"
+        android:layout_toStartOf="@+id/btn_add" />
 
     <Button
         android:id="@+id/btn_add"
@@ -37,8 +36,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 
-    <EditText
-        android:id="@+id/et_place"
+    <AutoCompleteTextView android:id="@+id/et_place"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint"
@@ -47,7 +45,9 @@
         android:inputType="text"
         android:layout_toLeftOf="@id/btn_add"
         android:layout_alignBottom="@+id/btn_add"
-        android:layout_below="@+id/addEntry" />
+        android:layout_below="@+id/addEntry"
+
+        />
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -64,5 +64,14 @@
             android:dividerHeight="4px"
             android:id="@+id/addressListView" />
      </FrameLayout>
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:textColor="@color/teal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

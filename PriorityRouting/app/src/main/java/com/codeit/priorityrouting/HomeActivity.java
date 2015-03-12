@@ -31,48 +31,30 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginActivity extends ActionBarActivity {
+public class HomeActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_home);
 
-        //Login button
-        final Button loginBtn = (Button) findViewById(R.id.sign_in_button);
-        loginBtn.setOnClickListener(new View.OnClickListener(){
+        //Address button on the Home page.
+        final Button addressBtn = (Button) findViewById(R.id.address_button);
+        addressBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+                Intent i = new Intent(HomeActivity.this, AddressActivity.class);
                 startActivity(i);
             }
         });
 
-        //Back button on the map page
-        final Button backBtn = (Button) findViewById(R.id.back_btn);
-        backBtn.setOnClickListener(new View.OnClickListener(){
+        //Map button on the Home page.
+        final Button mapBtn = (Button) findViewById(R.id.map_button);
+        mapBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, AddressActivity.class);
+                Intent i = new Intent(HomeActivity.this, MapsActivity.class);
                 startActivity(i);
             }
         });
 
-        //Logout button on the map page
-        final Button logoutBtn = (Button) findViewById(R.id.logout_btn);
-        logoutBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, LoginActivity.class);
-                startActivity(i);
-            }
-        });
-
-        // Register Button
-        final Button regBtn = (Button) findViewById(R.id.register_button);
-        regBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, RegistrationActivity.class);
-                startActivity(i);
-            }
-        });
     }
 }
