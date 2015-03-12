@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.Menu;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -60,7 +61,7 @@ public class MapsActivity extends FragmentActivity {
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
-     * call {@link #setUpMap()} once when {@link #mMap} is not null.
+     * call  once when {@link #mMap} is not null.
      * <p/>
      * If it isn't installed {@link SupportMapFragment} (and
      * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
@@ -90,13 +91,15 @@ public class MapsActivity extends FragmentActivity {
      *
      */
     private String getMapsApiDirectionsUrl(){
-        String waypoints = "waypoints=optimize:true" + LOWER_MANHATTAN.latitude + "," + LOWER_MANHATTAN.longitude + "|" + "|" + BROOKLYN_BRIDGE.latitude +
+        String waypoints = LOWER_MANHATTAN.latitude + "," + LOWER_MANHATTAN.longitude + "|" + BROOKLYN_BRIDGE.latitude +
                 "," + BROOKLYN_BRIDGE.longitude + "|" + TIMES_SQUARE.latitude + "," + TIMES_SQUARE.longitude;
 
-        String sensor = "sensor=false";
-        String params = waypoints + "&" + sensor;
+
+        String params = "waypoints=optimize:true|" + waypoints;
+        String origin = "Brooklyn,NY";
+        String destination = "40.783141078983206,-73.97972881793976";
         String output = "json";
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + params;
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?origin=" + origin + "&destination=" + destination + "&" + params;
 
         return url;
     }
@@ -113,11 +116,13 @@ public class MapsActivity extends FragmentActivity {
     }
 
 
+
     private class ReadTask extends AsyncTask<String, Void, String> {
 
         /**
          * set up an http connection
          */
+        @Override
         protected String doInBackground(String... url) {
             String data = "";
             try {
@@ -134,6 +139,7 @@ public class MapsActivity extends FragmentActivity {
          * call parsertask
          * @param result
          */
+        @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             new ParserTask().execute(result);
@@ -141,7 +147,7 @@ public class MapsActivity extends FragmentActivity {
     }
 
 
-    private class ParserTask extends AsyncTask<String,Integer,List> {
+    private class ParserTask extends AsyncTask<String,Integer,List<List<HashMap<String, String>>>> {
 
 
         /**
@@ -149,6 +155,7 @@ public class MapsActivity extends FragmentActivity {
          * @param jsonData
          * @return
          */
+        @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
 
             JSONObject jObject;
@@ -161,6 +168,8 @@ public class MapsActivity extends FragmentActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            Log.i("returning routes:", routes.toString());
             return routes;
 
         }
@@ -169,15 +178,17 @@ public class MapsActivity extends FragmentActivity {
          * should be drawing the paths
          * @param routes
          */
+        @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> routes) {
             ArrayList<LatLng> points = null;
             PolylineOptions polyLineOptions = null;
 
-            //traversing through routes
+            // traversing through routes
             for (int i = 0; i < routes.size(); i++) {
                 points = new ArrayList<LatLng>();
                 polyLineOptions = new PolylineOptions();
                 List<HashMap<String, String>> path = routes.get(i);
+
                 for (int j = 0; j < path.size(); j++) {
                     HashMap<String, String> point = path.get(j);
 
@@ -189,7 +200,7 @@ public class MapsActivity extends FragmentActivity {
                 }
 
                 polyLineOptions.addAll(points);
-                polyLineOptions.width(2);
+                polyLineOptions.width(8);
                 polyLineOptions.color(Color.BLUE);
             }
 
@@ -199,12 +210,9 @@ public class MapsActivity extends FragmentActivity {
 
 
     /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-
+/*
     private void setUpMap() {
         mMap.addPolyline((new PolylineOptions()).add(TIMES_SQUARE, BROOKLYN_BRIDGE, LOWER_MANHATTAN, TIMES_SQUARE).width(5).color(Color.BLUE).geodesic(true));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOWER_MANHATTAN, 13));
@@ -228,21 +236,22 @@ public class MapsActivity extends FragmentActivity {
         //Set map type ---------
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        /* Get latitude of the current location
-        double latitude = myLocation.getLatitude();
+        Get latitude of the current location
+//        double latitude = myLocation.getLatitude();
 
         //Get longitude of the current location
-        double longitude = myLocation.getLongitude();
+//        double longitude = myLocation.getLongitude();
 
         //Create a LatLng object for the current location
-        LatLng latLng = new LatLng(latitude, longitude);
+//        LatLng latLng = new LatLng(latitude, longitude);
 
         //Show the current location in Google Map
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         //Zoom in the Google Map
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!").snippet("You have been located."));
-    */
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here!").snippet("You have been located."));
+
     }
+*/
 }

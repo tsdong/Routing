@@ -27,6 +27,7 @@ public class HttpConnection {
                 sb.append(line);
             }
             data = sb.toString();
+            Log.i("Returning data:", data);
             br.close();
         } catch (Exception e) {
             Log.d("Exception while reading url", e.toString());
