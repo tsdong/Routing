@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Home Text Values  -->
+    <string name="home_title">Home</string>
+
+    <!--  Home Buttons  -->
+    <string name="btn_entry">Address Entry</string>
+    <string name="btn_map">Map</string>
+</resources>

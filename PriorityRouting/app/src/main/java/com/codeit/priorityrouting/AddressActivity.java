@@ -84,7 +84,7 @@ public class AddressActivity extends ActionBarActivity {
         });
 
         //back button on the address entry page.
-        final Button backBtn = (Button) findViewById(R.id.back_button);
+        final Button backBtn = (Button) findViewById(R.id.btn_back);
         backBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(AddressActivity.this, HomeActivity.class);

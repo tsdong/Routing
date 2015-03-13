@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="btn_submit">Submit</string>
-    <string name="btn_cancel">Cancel</string>
-    <string name="reg_user_name">User Name</string>
+    <!--  Registration Text Values -->
+    <string name="reg_title">Registration</string>
     <string name="reg_email">Email</string>
     <string name="reg_password">Password</string>
     <string name="reg_conf_password">Confirm Password</string>
 
+    <!--  Registration Buttons  -->
+    <string name="btn_submit">Submit</string>
+    <string name="btn_cancel">Cancel</string>
 </resources>

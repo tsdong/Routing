@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Address Strings  -->
+    <string name="addr_title">Address Entry</string>
+    <string name="addr_hint">Enter Place</string>
+
+    <!--  Address Buttons  -->
+    <string name="addAddress">Add</string>
+    <string name="route">Map It</string>
+    <string name="back">Back</string>
+</resources>

@@ -1,14 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_activity_login">Sign in</string>
-
-    <!-- Strings related to login -->
+    <!--  Login Text Values  -->
+    <string name="login">Login</string>
     <string name="user_name">User Name</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+
+
+    <!--  Login Buttons  -->
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_register">Not registered?  Signup.</string>
 
+
+    <!--  Login Error Strings  -->
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>

@@ -11,46 +11,34 @@
 
 
     <TextView
+        android:id="@+id/homeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Home"
+        android:text="@string/home_title"
         android:textSize="40sp"
         android:textColor="@color/gray86"
-        android:id="@+id/homeView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal" />
 
-    <RelativeLayout
+   <Button
+        android:id="@+id/address_button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="wrap_content"
+        android:text="@string/btn_entry"
+        android:textStyle="bold"
+        android:textColor="@color/teal"
+        android:layout_marginTop="30dp" />
 
-        <Button
-            android:id="@+id/address_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Address Entry"
-            android:textStyle="bold"
-            android:textColor="@color/teal"
-            android:layout_marginTop="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:id="@+id/map_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Map"
-            android:textStyle="bold"
-            android:textColor="@color/teal"
-            android:layout_below="@+id/address_button"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
+   <Button
+        android:id="@+id/map_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_map"
+        android:textStyle="bold"
+        android:textColor="@color/teal"
+        android:layout_below="@+id/address_button" />
 
 
 </LinearLayout>
