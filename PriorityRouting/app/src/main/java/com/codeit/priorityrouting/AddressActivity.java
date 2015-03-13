@@ -48,6 +48,7 @@ public class AddressActivity extends ActionBarActivity {
     ListView lv;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
