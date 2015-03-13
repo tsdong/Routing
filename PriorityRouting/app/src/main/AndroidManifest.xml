@@ -47,63 +47,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- The main/home activity (has no parent activity) -->
-        <activity
-            android:name="com.codeit.priorityrouting.HomeActivity">
-
-        </activity>
-        <!-- A child of the main activity -->
-        <activity
-            android:name="com.codeit.priorityrouting.AddressActivity"
-            android:label="back_button_address_activity"
-            android:parentActivityName="com.codeit.priorityrouting.HomeActivity" >
-            <!-- Parent activity meta-data to support API level 7+ -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.codeit.priorityrouting.HomeActivity" />
-        </activity>
-
-        <!--
         <activity
             android:theme="@style/Theme.AppCompat"
             android:name=".AddressActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden|adjustPan">
         </activity>
-        -->
-
         <activity
             android:theme="@style/Theme.AppCompat"
             android:name=".MapsActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden|adjustPan" >
         </activity>
-
-        <!--
         <activity
             android:theme="@style/Theme.AppCompat"
             android:name=".HomeActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden|adjustPan">
         </activity>
-        -->
-
         <activity
             android:theme="@style/Theme.AppCompat"
             android:name=".LoginActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden|adjustPan" >
         </activity>
-
         <activity
             android:theme="@style/Theme.AppCompat"
             android:name=".RegistrationActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan" >
-        </activity>
-        <activity
-            android:name=".HomeActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden|adjustPan" >
         </activity>
