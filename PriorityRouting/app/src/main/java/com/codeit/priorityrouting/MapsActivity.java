@@ -26,6 +26,7 @@ public class MapsActivity extends FragmentActivity {
     private static final LatLng TIMES_SQUARE = new LatLng(40.7577, -73.9857);
     private static final LatLng BROOKLYN_BRIDGE = new LatLng(40.7057, -73.9964);
 
+    String userInput;
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     final String TAG = "PathGoogleMapActivity";
@@ -91,8 +92,11 @@ public class MapsActivity extends FragmentActivity {
      *
      */
     private String getMapsApiDirectionsUrl(){
+
         String waypoints = LOWER_MANHATTAN.latitude + "," + LOWER_MANHATTAN.longitude + "|" + BROOKLYN_BRIDGE.latitude +
                 "," + BROOKLYN_BRIDGE.longitude + "|" + TIMES_SQUARE.latitude + "," + TIMES_SQUARE.longitude;
+
+
 
 
         String params = "waypoints=optimize:true|" + waypoints;

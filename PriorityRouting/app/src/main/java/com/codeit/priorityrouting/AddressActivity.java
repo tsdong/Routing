@@ -14,6 +14,9 @@ import java.util.List;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.location.Geocoder;
+import android.net.Uri;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -55,7 +58,20 @@ public class AddressActivity extends ActionBarActivity {
 
         et = (EditText) findViewById(R.id.et_place);
         lv = (ListView) findViewById(R.id.addressListView);
+
+        /////////
+        //Buttons
+        /////////
         btnAdd = (Button) findViewById(R.id.btn_add);
+        final Button mapButton = (Button) findViewById(R.id.btn_route);
+        final Button backBtn = (Button) findViewById(R.id.btn_back);
+
+
+        //////////////////
+        //Button Functions
+        //////////////////
+
+        //Add address to ListView
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,22 +92,26 @@ public class AddressActivity extends ActionBarActivity {
             }
         });
 
-        final Button mapButton = (Button) findViewById(R.id.btn_route);
+        //Navigate to map page
         mapButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
+//                String location = et.getText().toString();
+//                location = location.replace(" ", "+");
+
                 Intent i = new Intent(AddressActivity.this, MapsActivity.class);
                 startActivity(i);
+
             }
         });
 
-        //back button on the address entry page.
-        final Button backBtn = (Button) findViewById(R.id.btn_back);
+        //Navigate back to Home Page
         backBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(AddressActivity.this, HomeActivity.class);
                 startActivity(i);
             }
         });
+
     }
 
 
