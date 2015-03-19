@@ -7,11 +7,12 @@
     android:background="@color/gray35"
     tools:context="com.codeit.priorityrouting.RegistrationActivity">
 
+    //android:hint="@string/reg_email"
     <AutoCompleteTextView
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/reg_email"
+        android:hint="email"
         android:inputType="textEmailAddress"
         android:textColor="@color/teal"
         android:textColorHint="@color/teal"
