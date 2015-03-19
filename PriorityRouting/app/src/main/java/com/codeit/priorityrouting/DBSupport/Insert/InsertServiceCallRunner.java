@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
  */
 
 /**
- * Created by FZDDFL on 3/8/2015.
+ * Created by Hao Weng on 3/8/2015.
  */
 
 public class InsertServiceCallRunner extends AsyncTask<String,String,String> {
@@ -28,7 +28,7 @@ public class InsertServiceCallRunner extends AsyncTask<String,String,String> {
         String insertJson=params[0];
         System.out.println("I am going to insert: " + insertJson);
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-        String result = restTemplate.postForObject("http://10.0.2.2:9001/priorityRouting/insert", insertJson, String.class, "Android");
+        String result = restTemplate.postForObject("http://pigppo.com:9001/priorityRouting/insert", insertJson, String.class, "Android");
 
         return result;
     }

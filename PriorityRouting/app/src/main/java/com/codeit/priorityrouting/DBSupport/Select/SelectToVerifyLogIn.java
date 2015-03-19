@@ -1,4 +1,4 @@
-package com.codeit.priorityrouting.DBSupport;
+package com.codeit.priorityrouting.DBSupport.Select;
 
 import android.os.AsyncTask;
 
@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 /*
 *
- * Created by Hao on 3/8/2015.
+ * Created by Hao Weng on 3/8/2015.
  * */
 
 
@@ -28,9 +28,9 @@ public class SelectToVerifyLogIn extends AsyncTask<String,String,String> {
     protected String doInBackground(String ... params){
         String email=params[0];
 
-        String query = "select email, password from localtest.priorityRouting where email = " + "'" + email + "'";
+        String query = "select email, password from hao.user_info where email = " + "'" + email + "'";
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-        String result = restTemplate.postForObject("http://10.0.2.2:9001/priorityRouting/select", query,String.class,"Android");
+        String result = restTemplate.postForObject("http://pigppo.com:9001/priorityRouting/select", query,String.class,"Android");
 
         return result;
     }

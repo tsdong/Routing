@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by FZDDFL on 3/17/2015.
+ * Created by Hao Weng on 3/17/2015.
  */
 public class InsertObject {
 
