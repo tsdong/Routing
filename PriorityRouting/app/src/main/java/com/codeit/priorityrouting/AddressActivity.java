@@ -1,47 +1,39 @@
 package com.codeit.priorityrouting;
 
-import com.codeit.priorityrouting.R;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Geocoder;
-import android.net.Uri;
-import android.nfc.Tag;
+import android.location.Address;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import android.app.Activity;
-import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.Toast;
+import java.util.List;
+import java.util.Locale;
 
 
 public class AddressActivity extends ActionBarActivity {
@@ -89,13 +81,37 @@ public class AddressActivity extends ActionBarActivity {
         et = (EditText) findViewById(R.id.get_place);
         lv = (ListView) findViewById(R.id.addressListView);
 
+
+        ////////////
+        //Dialog Box
+        ////////////
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter an Address");
+        builder
+                .setMessage("Enter an address into the 'Enter Address' field and do not click 'Add'. Once address has been entered, click 'Map It'.")
+                .setCancelable(false)
+                .setNeutralButton("Okay", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+        /////////
+        //Create alert dialog
+        /////////
+        AlertDialog alertDialog = builder.create();
+
+        /////////
+        //Show dialog
+        /////////
+        alertDialog.show();
+
         /////////
         //Buttons
         /////////
         btnAdd = (Button) findViewById(R.id.btn_add);
         final Button mapButton = (Button) findViewById(R.id.btn_route);
         final Button backBtn = (Button) findViewById(R.id.btn_back);
-
 
         //////////////////
         //Button Functions
@@ -117,7 +133,7 @@ public class AddressActivity extends ActionBarActivity {
                     addArray.add(getInput);
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddressActivity.this, android.R.layout.simple_list_item_1, addArray);
                     lv.setAdapter(adapter);
-                    ((TextView) findViewById(R.id.addEntry)).setText("");
+                    ((EditText) findViewById(R.id.get_place)).setText("");
                 }
             }
         });
@@ -125,10 +141,13 @@ public class AddressActivity extends ActionBarActivity {
         //Navigate to map page
         mapButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-//                String location = et.getText().toString();
-//                location = location.replace(" ", "+");
+
+                et = (EditText) findViewById(R.id.get_place);
+                String location = et.getText().toString();
+                location = location.replace(" ", "+");
 
                 Intent i = new Intent(AddressActivity.this, MapsActivity.class);
+                i.putExtra("addr", location);
                 startActivity(i);
 
             }
@@ -143,5 +162,4 @@ public class AddressActivity extends ActionBarActivity {
         });
 
     }
-
 }

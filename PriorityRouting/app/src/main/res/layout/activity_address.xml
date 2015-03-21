@@ -36,7 +36,7 @@
         android:textStyle="bold"
         android:layout_below="@+id/addressListView"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true" />
 
     <Button
         android:id="@+id/btn_back"
