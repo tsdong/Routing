@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.codeit.priorityrouting.DBSupport.Select.SelectToVerifyLogIn;
 import com.google.gson.Gson;
 
+import java.util.List;
+
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -36,6 +38,10 @@ public class LoginActivity extends ActionBarActivity {
 
 
         System.out.println("The response is : " + response);
+
+        List list = gson.fromJson(response, List.class);
+
+
 
         if(response.equalsIgnoreCase("[]")){
             //insert into data base
@@ -104,7 +110,6 @@ public class LoginActivity extends ActionBarActivity {
                     selectToVerifyLogIn.execute(email);
                     selectToVerifyLogIn.loginActivity = LoginActivity.this;
                 }
-
             }
         });
 

@@ -140,8 +140,6 @@ public class RegistrationActivity extends ActionBarActivity {
                     Toast.makeText(RegistrationActivity.this, "Passwords don't match. Please make sure the passwords are matched", Toast.LENGTH_LONG).show();
                 }
 
-
-
             }
         });
 
