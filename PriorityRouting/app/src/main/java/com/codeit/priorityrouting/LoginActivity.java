@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.codeit.priorityrouting.DBSupport.Select.SelectToVerifyLogIn;
+import com.google.gson.Gson;
 
 
 public class LoginActivity extends ActionBarActivity {
@@ -21,6 +22,8 @@ public class LoginActivity extends ActionBarActivity {
     public String emailAddress;
     public String userPassword;
 
+    Gson gson = new Gson();
+
     public void selectObjectReturn(String res){
 
         verifyUser(res);
@@ -29,6 +32,10 @@ public class LoginActivity extends ActionBarActivity {
 
 
     public void verifyUser(String response){
+
+
+
+        System.out.println("The response is : " + response);
 
         if(response.equalsIgnoreCase("[]")){
             //insert into data base
@@ -78,13 +85,25 @@ public class LoginActivity extends ActionBarActivity {
                 String password = mUserPassword.getText().toString().trim();
                 userPassword=password;
 
+                if(email==null && password==null){
 
-                SelectToVerifyLogIn selectToVerifyLogIn = new SelectToVerifyLogIn();
+                    Toast.makeText(LoginActivity.this, "All the fields cannot be null.", Toast.LENGTH_LONG).show();
+                }
+                else if(email.equals("") && password.equals("")){
+                    Toast.makeText(LoginActivity.this, "All the fields cannot be null.", Toast.LENGTH_LONG).show();
+                }
+                else if(email.equals("") || email==null){
+                    Toast.makeText(LoginActivity.this, "Username cannot be null", Toast.LENGTH_LONG).show();
+                }
+                else if(password.equals("") || password==null){
+                    Toast.makeText(LoginActivity.this, "Password cannot be null", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    SelectToVerifyLogIn selectToVerifyLogIn = new SelectToVerifyLogIn();
 
-                selectToVerifyLogIn.execute(email);
-                selectToVerifyLogIn.loginActivity = LoginActivity.this;
-
-
+                    selectToVerifyLogIn.execute(email);
+                    selectToVerifyLogIn.loginActivity = LoginActivity.this;
+                }
 
             }
         });

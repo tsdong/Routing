@@ -112,19 +112,33 @@ public class RegistrationActivity extends ActionBarActivity {
                 String confirmPass = mUserConfirmPassword.getText().toString().trim();
                 confirmPassword=confirmPass;
 
+                //verify email, password, and confirmPassword are not null
+                if(email==null && password==null && confirmPass==null){
+
+                    Toast.makeText(RegistrationActivity.this, "All the fields cannot be null.", Toast.LENGTH_LONG).show();
+                }
+                else if(email.equals("") && password.equals("") && confirmPass.equals("")){
+                    Toast.makeText(RegistrationActivity.this, "All the fields cannot be null.", Toast.LENGTH_LONG).show();
+                }
+                else if(email==null || email.equals("")){
+                    Toast.makeText(RegistrationActivity.this, "Email cannot be null", Toast.LENGTH_LONG).show();
+                }
+                else if(password==null || password.equals("")){
+                    Toast.makeText(RegistrationActivity.this, "Password cannot be null", Toast.LENGTH_LONG).show();
+                }
+                else if(confirmPass==null || confirmPass.equals("")){
+                    Toast.makeText(RegistrationActivity.this, "Confirm password cannot be null", Toast.LENGTH_LONG).show();
+                }
                 //verify password and confirmPassword are matched
-                if(password.equals(confirmPass)){
+               else if(password.equals(confirmPass)){
                     SelectServiceCallRunner selectServiceCallRunner = new SelectServiceCallRunner();
 
                     selectServiceCallRunner.execute(email);
                     selectServiceCallRunner.registrationActivity = RegistrationActivity.this;
                 }
                 else{
-                    Toast.makeText(RegistrationActivity.this, "Password don't match. Please make sure the passwords are matched", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistrationActivity.this, "Passwords don't match. Please make sure the passwords are matched", Toast.LENGTH_LONG).show();
                 }
-
-
-
 
 
 
