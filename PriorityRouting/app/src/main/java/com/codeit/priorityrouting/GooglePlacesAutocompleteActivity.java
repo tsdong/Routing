@@ -43,7 +43,7 @@ public class GooglePlacesAutocompleteActivity extends Activity implements OnItem
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
-        AutoCompleteTextView autoCompView = (AutoCompleteTextView) findViewById(R.id.addressListView);
+        AutoCompleteTextView autoCompView = (AutoCompleteTextView) findViewById(R.id.get_place);
 
         autoCompView.setAdapter(new GooglePlacesAutocompleteAdapter(this, R.layout.list_item));
         autoCompView.setOnItemClickListener(this);
