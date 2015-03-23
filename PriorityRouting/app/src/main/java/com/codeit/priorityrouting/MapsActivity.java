@@ -132,17 +132,17 @@ public class MapsActivity extends FragmentActivity {
 
 
 
-        String waypoints = LOWER_MANHATTAN.latitude + "," + LOWER_MANHATTAN.longitude + "|" + BROOKLYN_BRIDGE.latitude +
-                "," + BROOKLYN_BRIDGE.longitude + "|" + TIMES_SQUARE.latitude + "," + TIMES_SQUARE.longitude;
+        //String waypoints = LOWER_MANHATTAN.latitude + "," + LOWER_MANHATTAN.longitude + "|" + BROOKLYN_BRIDGE.latitude +
+               // "," + BROOKLYN_BRIDGE.longitude + "|" + TIMES_SQUARE.latitude + "," + TIMES_SQUARE.longitude;
 
         String userInput = getIntent().getExtras().getString("addr");
+        String waypoints = userInput;
 
 
-
-        String params = "waypoints=optimize:true|" + waypoints;
-        String origin = "Brooklyn,NY";
+                String params = "waypoints=optimize:true|" + waypoints;
+        String origin = "Oakland+University";
 //        String destination = "2100+Woodward+Ave,+Detroit,+MI+48210";
-        String destination = userInput;
+        String destination = "Pontiac";
         String output = "json";
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?origin=" + origin + "&destination=" + destination + "&" + params;
 

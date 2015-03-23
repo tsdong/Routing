@@ -42,6 +42,8 @@ public class AddressActivity extends ActionBarActivity {
     ArrayList<String> addArray = new ArrayList<String>();
     EditText et;
     ListView lv;
+    String toBePassed = "";
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -130,6 +132,12 @@ public class AddressActivity extends ActionBarActivity {
                     Toast.makeText(getBaseContext(), "Address entry is empty.", Toast.LENGTH_LONG);
                 }
                 else{
+                    if(toBePassed.equals("")) {
+                        toBePassed = toBePassed + getInput;
+                    }
+                    else {
+                        toBePassed = toBePassed + "|" + getInput;
+                    }
                     addArray.add(getInput);
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddressActivity.this, android.R.layout.simple_list_item_1, addArray);
                     lv.setAdapter(adapter);
@@ -142,12 +150,13 @@ public class AddressActivity extends ActionBarActivity {
         mapButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
 
-                et = (EditText) findViewById(R.id.get_place);
-                String location = et.getText().toString();
-                location = location.replace(" ", "+");
+               // et = (EditText) findViewById(R.id.get_place);
+                //String location = et.getText().toString();
+                //location = location.replace(" ", "+");
+                toBePassed = toBePassed.replace(" ", "+");
 
                 Intent i = new Intent(AddressActivity.this, MapsActivity.class);
-                i.putExtra("addr", location);
+                i.putExtra("addr", toBePassed);
                 startActivity(i);
 
             }
