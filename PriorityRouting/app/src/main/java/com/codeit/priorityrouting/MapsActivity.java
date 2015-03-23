@@ -33,6 +33,7 @@ public class MapsActivity extends FragmentActivity {
     private static final LatLng LOWER_MANHATTAN = new LatLng(40.722543, -73.998585);
     private static final LatLng TIMES_SQUARE = new LatLng(40.7577, -73.9857);
     private static final LatLng BROOKLYN_BRIDGE = new LatLng(40.7057, -73.9964);
+    private static final LatLng Oakland_University = new LatLng(42.672979,-83.215783);
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     final String TAG = "PathGoogleMapActivity";
@@ -86,7 +87,7 @@ public class MapsActivity extends FragmentActivity {
         ReadTask downloadTask = new ReadTask();
         downloadTask.execute(url);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BROOKLYN_BRIDGE,13));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Oakland_University,13));
         addMarkers();
     }
 

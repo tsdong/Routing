@@ -87,7 +87,7 @@ public class AddressActivity extends ActionBarActivity {
         ////////////
         //Dialog Box
         ////////////
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+/*        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter an Address");
         builder
                 .setMessage("Enter an address into the 'Enter Address' field and do not click 'Add'. Once address has been entered, click 'Map It'.")
@@ -107,6 +107,7 @@ public class AddressActivity extends ActionBarActivity {
         //Show dialog
         /////////
         alertDialog.show();
+*/
 
         /////////
         //Buttons
