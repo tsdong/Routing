@@ -16,7 +16,7 @@
     </style>
 
     <style name="ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/teal</item>
+        <item name="android:actionBarStyle">@color/teal</item>
         <item name="android:icon">@drawable/prioritylogo</item>
     </style>
 

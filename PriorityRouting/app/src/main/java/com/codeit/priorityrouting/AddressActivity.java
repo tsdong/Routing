@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +42,7 @@ public class AddressActivity extends ActionBarActivity {
 
     Button btnAdd;
     ArrayList<String> addArray = new ArrayList<String>();
+    ArrayAdapter<String> adapter;
     EditText et;
     ListView lv;
     String toBePassed = "";
@@ -88,6 +90,7 @@ public class AddressActivity extends ActionBarActivity {
         ////////////
         //Dialog Box
         ////////////
+
 /*        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter an Address");
         builder
@@ -141,12 +144,27 @@ public class AddressActivity extends ActionBarActivity {
                         toBePassed = toBePassed + "|" + getInput;
                     }
                     addArray.add(getInput);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddressActivity.this, android.R.layout.simple_list_item_1, addArray);
+                    adapter = new ArrayAdapter<String>(AddressActivity.this, android.R.layout.simple_list_item_1, addArray);
                     lv.setAdapter(adapter);
                     ((EditText) findViewById(R.id.get_place)).setText("");
                 }
             }
         });
+
+
+        /////////
+        //Remove Item
+        /////////
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                removeItemFromList(position);
+                return true;
+            }
+        });
+
+
+
 
         //Navigate to map page
         mapButton.setOnClickListener(new View.OnClickListener(){
@@ -172,5 +190,31 @@ public class AddressActivity extends ActionBarActivity {
             }
         });
 
+    }
+
+    //method to remove list item
+    protected void removeItemFromList(int position) {
+        final int deletePosition = position;
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(AddressActivity.this);
+        alert.setTitle("Delete");
+        alert.setMessage("Do you want to delete this address?");
+        alert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                addArray.remove(deletePosition);
+                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetInvalidated();
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
     }
 }
