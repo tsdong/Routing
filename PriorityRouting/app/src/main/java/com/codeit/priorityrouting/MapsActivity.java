@@ -7,10 +7,14 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -71,9 +75,10 @@ public class MapsActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mMap = fm.getMap();
+//        SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+//        mMap = fm.getMap();
 
+        setUpMapIfNeeded();
         String userInput = getIntent().getExtras().getString("addr");
 
         Toast.makeText(this, userInput, Toast.LENGTH_LONG).show();
@@ -87,8 +92,8 @@ public class MapsActivity extends FragmentActivity {
         ReadTask downloadTask = new ReadTask();
         downloadTask.execute(url);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Oakland_University,13));
-        addMarkers();
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Oakland_University,13));
+//        addMarkers();
     }
 
     @Override
@@ -120,7 +125,8 @@ public class MapsActivity extends FragmentActivity {
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                addMarkers();
+                setUpMap();
+//                addMarkers();
             }
         }
     }
@@ -140,7 +146,8 @@ public class MapsActivity extends FragmentActivity {
         String waypoints = userInput;
 
 
-                String params = "waypoints=optimize:true|" + waypoints;
+        String params = "waypoints=optimize:true|" + waypoints;
+
         String origin = "Oakland+University";
 //        String destination = "2100+Woodward+Ave,+Detroit,+MI+48210";
         String destination = "Pontiac";
@@ -252,5 +259,46 @@ public class MapsActivity extends FragmentActivity {
 
             mMap.addPolyline(polyLineOptions);
         }
+    }
+
+    private void setUpMap() {
+        mMap.addMarker(new MarkerOptions().position(new LatLng(0,0)).title("Marker"));
+
+        //Enable MyLocation layer of Google Map
+        mMap.setMyLocationEnabled(true);
+
+        //Get LocationManager object from System Service LOCATION_SERVICES
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        //Create a criteria object to retrieve provider
+        Criteria criteria = new Criteria();
+
+        //Get the name of the best provider
+        String provider = locationManager.getBestProvider(criteria, true);
+
+        //Get current location
+        Location myLocation = locationManager.getLastKnownLocation(provider);
+
+        //Set map type
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        //Enable traffic
+        mMap.setTrafficEnabled(false);
+
+        //Get Lat of current location
+        double latitude = myLocation.getLatitude();
+
+        //Get Lng of current location
+        double longitude = myLocation.getLongitude();
+
+        //Create a LatLng object for the current location
+        LatLng latLng = new LatLng(latitude, longitude);
+
+        //Show the current location in Google Map
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+        //Zoom in the Google Map
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here"));
     }
 }
