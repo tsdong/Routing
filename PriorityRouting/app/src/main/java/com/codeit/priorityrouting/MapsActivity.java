@@ -34,6 +34,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity {
 
+
+
     private static final LatLng LOWER_MANHATTAN = new LatLng(40.722543, -73.998585);
     private static final LatLng TIMES_SQUARE = new LatLng(40.7577, -73.9857);
     private static final LatLng BROOKLYN_BRIDGE = new LatLng(40.7057, -73.9964);
@@ -75,25 +77,32 @@ public class MapsActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-//        SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-//        mMap = fm.getMap();
 
-        setUpMapIfNeeded();
+        LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        MyLocationListener locationListener = new MyLocationListener();
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        LatLng Origin = new LatLng(lastKnownLocation.getLatitude(),lastKnownLocation.getLongitude());
+
+        SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mMap = fm.getMap();
+
+        //setUpMapIfNeeded();
         String userInput = getIntent().getExtras().getString("addr");
 
-        Toast.makeText(this, userInput, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, userInput.replace("+"," "), Toast.LENGTH_LONG).show();
 
         MarkerOptions options = new MarkerOptions();
         options.position(LOWER_MANHATTAN);
         options.position(BROOKLYN_BRIDGE);
         options.position(TIMES_SQUARE);
         mMap.addMarker(options);
-        String url = getMapsApiDirectionsUrl();
+        String url = getMapsApiDirectionsUrl(Origin);
         ReadTask downloadTask = new ReadTask();
         downloadTask.execute(url);
 
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Oakland_University,13));
-//        addMarkers();
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Origin,13));
+        addMarkers();
     }
 
     @Override
@@ -125,8 +134,8 @@ public class MapsActivity extends FragmentActivity {
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                setUpMap();
-//                addMarkers();
+                //setUpMap();
+                addMarkers();
             }
         }
     }
@@ -135,8 +144,12 @@ public class MapsActivity extends FragmentActivity {
      * this sets up the URL request using the given coordinates
      *
      */
-    private String getMapsApiDirectionsUrl(){
+    private String getMapsApiDirectionsUrl(LatLng Origin){
 
+
+        String Origin2 = Origin.toString();
+        String Origin3 = Origin2.replace(")","");
+        String Origin4 = Origin3.replace("lat/lng: (","");
 
 
         //String waypoints = LOWER_MANHATTAN.latitude + "," + LOWER_MANHATTAN.longitude + "|" + BROOKLYN_BRIDGE.latitude +
@@ -148,7 +161,7 @@ public class MapsActivity extends FragmentActivity {
 
         String params = "waypoints=optimize:true|" + waypoints;
 
-        String origin = "Oakland+University";
+        String origin = Origin4;
 //        String destination = "2100+Woodward+Ave,+Detroit,+MI+48210";
         String destination = "Pontiac";
         String output = "json";
@@ -301,4 +314,5 @@ public class MapsActivity extends FragmentActivity {
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
         mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here"));
     }
+
 }
