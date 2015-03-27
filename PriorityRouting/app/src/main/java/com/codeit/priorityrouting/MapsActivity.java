@@ -87,10 +87,12 @@ public class MapsActivity extends FragmentActivity {
         SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMap = fm.getMap();
 
-        //setUpMapIfNeeded();
+//        setUpMapIfNeeded();
         String userInput = getIntent().getExtras().getString("addr");
+//        String addrCoords = getIntent().getExtras().getString("latlng");
 
         Toast.makeText(this, userInput.replace("+"," "), Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, addrCoords, Toast.LENGTH_LONG).show();
 
         MarkerOptions options = new MarkerOptions();
         options.position(LOWER_MANHATTAN);

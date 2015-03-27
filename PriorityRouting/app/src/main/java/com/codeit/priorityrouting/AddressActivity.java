@@ -41,6 +41,7 @@ import java.util.Locale;
 public class AddressActivity extends ActionBarActivity {
 
     Button btnAdd;
+    Geocoder geocoder;
     ArrayList<String> addArray = new ArrayList<String>();
     ArrayAdapter<String> adapter;
     EditText et;
@@ -164,19 +165,35 @@ public class AddressActivity extends ActionBarActivity {
         });
 
 
-
-
         //Navigate to map page
         mapButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
 
-               // et = (EditText) findViewById(R.id.get_place);
+                //et = (EditText) findViewById(R.id.get_place);
                 //String location = et.getText().toString();
                 //location = location.replace(" ", "+");
+/*
+                lv = (ListView) findViewById(R.id.addressListView);
+                String locCoord = lv.toString();
+                String coords = null;
+                List<Address> addrs = null;
+                try {
+                    addrs = geocoder.getFromLocationName(locCoord, 10);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(addrs != null && addrs.size() > 0) {
+                    double lat = (double) (addrs.get(0).getLatitude() * 1000000);
+                    double lng = (double) (addrs.get(0).getLongitude() * 1000000);
+
+                    coords = String.valueOf((lat + "," + lng));
+                }
+*/
                 toBePassed = toBePassed.replace(" ", "+");
 
                 Intent i = new Intent(AddressActivity.this, MapsActivity.class);
                 i.putExtra("addr", toBePassed);
+//                i.putExtra("latlng", coords);
                 startActivity(i);
 
             }
@@ -217,4 +234,7 @@ public class AddressActivity extends ActionBarActivity {
 
         alert.show();
     }
+
+    //Geocode address
+
 }
