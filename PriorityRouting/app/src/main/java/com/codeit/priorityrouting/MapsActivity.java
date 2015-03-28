@@ -163,7 +163,7 @@ public class MapsActivity extends FragmentActivity {
 
         String origin = Origin4;
 //        String destination = "2100+Woodward+Ave,+Detroit,+MI+48210";
-        String destination = "Pontiac";
+        String destination = getIntent().getExtras().getString("desto");
         String output = "json";
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?origin=" + origin + "&destination=" + destination + "&" + params;
 
@@ -314,5 +314,7 @@ public class MapsActivity extends FragmentActivity {
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
         mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here"));
     }
+
+
 
 }

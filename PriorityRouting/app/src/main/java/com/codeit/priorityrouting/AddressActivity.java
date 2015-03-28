@@ -170,12 +170,13 @@ public class AddressActivity extends ActionBarActivity {
         mapButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
 
-               // et = (EditText) findViewById(R.id.get_place);
-                //String location = et.getText().toString();
-                //location = location.replace(" ", "+");
+                 et = (EditText) findViewById(R.id.get_place);
+                String destination = et.getText().toString();
+                destination = destination.replace(" ", "+");
                 toBePassed = toBePassed.replace(" ", "+");
 
                 Intent i = new Intent(AddressActivity.this, MapsActivity.class);
+                i.putExtra("desto", destination);
                 i.putExtra("addr", toBePassed);
                 startActivity(i);
 
