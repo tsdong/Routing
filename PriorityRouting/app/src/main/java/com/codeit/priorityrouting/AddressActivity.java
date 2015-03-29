@@ -169,11 +169,10 @@ public class AddressActivity extends ActionBarActivity {
         mapButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
 
-<<<<<<< HEAD
-                 et = (EditText) findViewById(R.id.get_place);
+                et = (EditText) findViewById(R.id.get_place);
                 String destination = et.getText().toString();
                 destination = destination.replace(" ", "+");
-=======
+
                 //et = (EditText) findViewById(R.id.get_place);
                 //String location = et.getText().toString();
                 //location = location.replace(" ", "+");
@@ -194,7 +193,7 @@ public class AddressActivity extends ActionBarActivity {
                     coords = String.valueOf((lat + "," + lng));
                 }
 */
->>>>>>> origin/dev
+
                 toBePassed = toBePassed.replace(" ", "+");
 
                 Intent i = new Intent(AddressActivity.this, MapsActivity.class);
