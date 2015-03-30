@@ -188,6 +188,7 @@ public class AddressActivity extends ActionBarActivity {
         {
              public void onClick(View v) {
 
+<<<<<<< HEAD
                 et = (EditText) findViewById(R.id.get_place);
                  String location = et.getText().toString();
                  String url = "https://maps.googleapis.com/maps/api/geocode/json?";
@@ -195,6 +196,38 @@ public class AddressActivity extends ActionBarActivity {
                 destination = destination.replace(" ", "+");
 
                   toBePassed = toBePassed.replace(" ", "+");
+=======
+        //Navigate to map page
+        mapButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+
+                et = (EditText) findViewById(R.id.get_place);
+                String destination = et.getText().toString();
+                destination = destination.replace(" ", "+");
+
+                //et = (EditText) findViewById(R.id.get_place);
+                //String location = et.getText().toString();
+                //location = location.replace(" ", "+");
+/*
+                lv = (ListView) findViewById(R.id.addressListView);
+                String locCoord = lv.toString();
+                String coords = null;
+                List<Address> addrs = null;
+                try {
+                    addrs = geocoder.getFromLocationName(locCoord, 10);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if(addrs != null && addrs.size() > 0) {
+                    double lat = (double) (addrs.get(0).getLatitude() * 1000000);
+                    double lng = (double) (addrs.get(0).getLongitude() * 1000000);
+
+                    coords = String.valueOf((lat + "," + lng));
+                }
+*/
+
+                toBePassed = toBePassed.replace(" ", "+");
+>>>>>>> origin/dev
 
                  String address = "address=" + location;
 
