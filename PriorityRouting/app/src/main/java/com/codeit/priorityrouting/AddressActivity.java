@@ -1,41 +1,24 @@
 package com.codeit.priorityrouting;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Geocoder;
-import android.location.Address;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 
 public class AddressActivity extends ActionBarActivity {
@@ -132,10 +115,10 @@ public class AddressActivity extends ActionBarActivity {
                 String getInput = et.getText().toString();
 
                 if(addArray.contains(getInput)){
-                    Toast.makeText(getBaseContext(), "Address already exists list", Toast.LENGTH_LONG);
+                    Toast.makeText(getBaseContext(), "Address already exists list", Toast.LENGTH_LONG).show();
                 }
                 else if(getInput == null || getInput.trim().equals("")){
-                    Toast.makeText(getBaseContext(), "Address entry is empty.", Toast.LENGTH_LONG);
+                    Toast.makeText(getBaseContext(), "Address entry is empty.", Toast.LENGTH_LONG).show();
                 }
                 else{
                     if(toBePassed.equals("")) {
