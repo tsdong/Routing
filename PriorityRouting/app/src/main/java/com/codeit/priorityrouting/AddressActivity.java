@@ -1,52 +1,53 @@
 package com.codeit.priorityrouting;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Geocoder;
-import android.location.Address;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.HashMap;
 
+import org.json.JSONObject;
+
+import android.util.Log;
+
+import com.google.android.gms.maps.model.LatLng;
 
 public class AddressActivity extends ActionBarActivity {
 
     Button btnAdd;
-    Geocoder geocoder;
     ArrayList<String> addArray = new ArrayList<String>();
     ArrayAdapter<String> adapter;
     EditText et;
     ListView lv;
     String toBePassed = "";
+    String destination = "";
+    ArrayList<String> Addresses = new ArrayList<String>();
+
 
 
     @Override
@@ -130,20 +131,39 @@ public class AddressActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 String getInput = et.getText().toString();
+                String location = et.getText().toString();
+                String url = "https://maps.googleapis.com/maps/api/geocode/json?";
+                try {
+                    // encoding special characters like space in the user input place
+                    location = URLEncoder.encode(location, "utf-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
 
-                if(addArray.contains(getInput)){
+
+
+
+                if (addArray.contains(getInput)) {
                     Toast.makeText(getBaseContext(), "Address already exists list", Toast.LENGTH_LONG);
-                }
-                else if(getInput == null || getInput.trim().equals("")){
+                } else if (getInput == null || getInput.trim().equals("")) {
                     Toast.makeText(getBaseContext(), "Address entry is empty.", Toast.LENGTH_LONG);
-                }
-                else{
-                    if(toBePassed.equals("")) {
+                } else {
+                    if (toBePassed.equals("")) {
+
                         toBePassed = toBePassed + getInput;
-                    }
-                    else {
+                        //Addresses.add(geocoder.getFromLocationName(getInput,1));
+                    } else {
                         toBePassed = toBePassed + "|" + getInput;
                     }
+                    String address = "address=" + location;
+
+                    String sensor = "sensor=false";
+
+                    url = url + address + "&" + sensor;
+
+                    Addresses.add(url);
+
+
                     addArray.add(getInput);
                     adapter = new ArrayAdapter<String>(AddressActivity.this, android.R.layout.simple_list_item_1, addArray);
                     lv.setAdapter(adapter);
@@ -164,57 +184,54 @@ public class AddressActivity extends ActionBarActivity {
             }
         });
 
+        mapButton.setOnClickListener(new View.OnClickListener()
+        {
+             public void onClick(View v) {
 
-        //Navigate to map page
-        mapButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-
-<<<<<<< HEAD
-                 et = (EditText) findViewById(R.id.get_place);
-                String destination = et.getText().toString();
+                et = (EditText) findViewById(R.id.get_place);
+                 String location = et.getText().toString();
+                 String url = "https://maps.googleapis.com/maps/api/geocode/json?";
+                destination = et.getText().toString();
                 destination = destination.replace(" ", "+");
-=======
-                //et = (EditText) findViewById(R.id.get_place);
-                //String location = et.getText().toString();
-                //location = location.replace(" ", "+");
-/*
-                lv = (ListView) findViewById(R.id.addressListView);
-                String locCoord = lv.toString();
-                String coords = null;
-                List<Address> addrs = null;
-                try {
-                    addrs = geocoder.getFromLocationName(locCoord, 10);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if(addrs != null && addrs.size() > 0) {
-                    double lat = (double) (addrs.get(0).getLatitude() * 1000000);
-                    double lng = (double) (addrs.get(0).getLongitude() * 1000000);
 
-                    coords = String.valueOf((lat + "," + lng));
-                }
-*/
->>>>>>> origin/dev
-                toBePassed = toBePassed.replace(" ", "+");
+                  toBePassed = toBePassed.replace(" ", "+");
 
-                Intent i = new Intent(AddressActivity.this, MapsActivity.class);
-                i.putExtra("desto", destination);
-                i.putExtra("addr", toBePassed);
-//                i.putExtra("latlng", coords);
-                startActivity(i);
+                 String address = "address=" + location;
 
+                 String sensor = "sensor=false";
+
+                 url = url + address + "&" + sensor;
+
+                 Addresses.add(url);
+                  Intent i = new Intent(AddressActivity.this, MapsActivity.class);
+                  i.putExtra("desto", destination);
+                  i.putExtra("addr", toBePassed);
+                 i.putStringArrayListExtra("markers", Addresses);
+                  startActivity(i);
+
+                  }
             }
-        });
+
+        );
 
         //Navigate back to Home Page
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(AddressActivity.this, HomeActivity.class);
-                startActivity(i);
-            }
-        });
+        backBtn.setOnClickListener(new View.OnClickListener()
+             {
+                    public void onClick (View v){
+                          Intent i = new Intent(AddressActivity.this, HomeActivity.class);
+                          startActivity(i);
+                    }
+             }
 
+        );
     }
+
+
+
+    //Navigate to map page
+
+
+
 
     //method to remove list item
     protected void removeItemFromList(int position) {
