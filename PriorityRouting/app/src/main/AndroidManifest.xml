@@ -2,9 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codeit.priorityrouting" >
 
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-sdk android:minSdkVersion="7"  android:targetSdkVersion="18" />
+
+
+
+    <uses-permission android:name="in.wptrafficanalyzer.locationgeocodingapiv2.permission.MAPS_RECEIVE"/>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

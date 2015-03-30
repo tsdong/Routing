@@ -35,12 +35,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity {
 
 
-
-    private static final LatLng LOWER_MANHATTAN = new LatLng(40.722543, -73.998585);
-    private static final LatLng TIMES_SQUARE = new LatLng(40.7577, -73.9857);
-    private static final LatLng BROOKLYN_BRIDGE = new LatLng(40.7057, -73.9964);
-    private static final LatLng Oakland_University = new LatLng(42.672979,-83.215783);
-
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     final String TAG = "PathGoogleMapActivity";
 
@@ -94,25 +88,21 @@ public class MapsActivity extends FragmentActivity {
         Toast.makeText(this, userInput.replace("+"," "), Toast.LENGTH_LONG).show();
 //        Toast.makeText(this, addrCoords, Toast.LENGTH_LONG).show();
 
-        MarkerOptions options = new MarkerOptions();
-        options.position(LOWER_MANHATTAN);
-        options.position(BROOKLYN_BRIDGE);
-        options.position(TIMES_SQUARE);
-        mMap.addMarker(options);
+
         String url = getMapsApiDirectionsUrl(Origin);
-        ReadTask downloadTask = new ReadTask();
-        downloadTask.execute(url);
+        ReadTask readTask = new ReadTask();
+        readTask.execute(url);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Origin,13));
-        addMarkers();
+        addMarkers(getIntent().getExtras().getStringArrayList("markers"));
     }
-
+/*
     @Override
-    protected void onResume() {
+    protected void onResume(ArrayList<String> markers) {
         super.onResume();
-        setUpMapIfNeeded();
+        setUpMapIfNeeded(markers);
     }
-
+*/
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
@@ -128,7 +118,8 @@ public class MapsActivity extends FragmentActivity {
      * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
      * method in {@link #onResume()} to guarantee that it will be called.
      */
-    private void setUpMapIfNeeded() {
+/*
+    private void setUpMapIfNeeded(ArrayList<String> markers) {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
@@ -137,11 +128,11 @@ public class MapsActivity extends FragmentActivity {
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 //setUpMap();
-                addMarkers();
+                addMarkers(markers);
             }
         }
     }
-
+*/
     /**
      * this sets up the URL request using the given coordinates
      *
@@ -175,11 +166,14 @@ public class MapsActivity extends FragmentActivity {
     /**
      * add markers to map if map is up
      */
-    private void addMarkers(){
+    private void addMarkers(ArrayList<String> markers){
         if (mMap != null) {
-            mMap.addMarker(new MarkerOptions().position(BROOKLYN_BRIDGE).title("First Point"));
-            mMap.addMarker(new MarkerOptions().position(LOWER_MANHATTAN).title("Second Point"));
-            mMap.addMarker(new MarkerOptions().position(TIMES_SQUARE).title("Third Point"));
+
+            for(int i=0;i<markers.size();i++){
+                DownloadTask downloadTask = new DownloadTask();
+                String marker = markers.get(i);
+                downloadTask.execute(marker);
+            }
         }
     }
 
@@ -275,7 +269,7 @@ public class MapsActivity extends FragmentActivity {
             mMap.addPolyline(polyLineOptions);
         }
     }
-
+/*
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0,0)).title("Marker"));
 
@@ -316,7 +310,71 @@ public class MapsActivity extends FragmentActivity {
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
         mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("You are here"));
     }
+*/
+    private class DownloadTask extends AsyncTask<String, Integer, String> {
 
+        String data = null;
 
+        // Invoked by execute() method of this object
+        @Override
+        protected String doInBackground(String... url) {
+            try {
+                HttpConnection http2 = new HttpConnection();
+                data = http2.readUrl(url[0]);
+            } catch (Exception e) {
+                Log.d("Background Task", e.toString());
+            }
+            return data;
+        }
+
+        // Executed after the complete execution of doInBackground() method
+        @Override
+        protected void onPostExecute(String result) {
+
+            super.onPostExecute(result);
+            new ParserTask2().execute(result);
+        }
+    }
+
+    class ParserTask2 extends AsyncTask<String, Integer, List<HashMap<String, String>>> {
+
+        JSONObject jObject;
+
+        // Invoked by execute() method of this object
+        @Override
+        protected List<HashMap<String, String>> doInBackground(String... jsonData) {
+
+            List<HashMap<String, String>> places = null;
+            GeocodeJSONParser parser = new GeocodeJSONParser();
+
+            try {
+                jObject = new JSONObject(jsonData[0]);
+
+                /** Getting the parsed data as a an ArrayList */
+                places = parser.parse(jObject);
+
+            } catch (Exception e) {
+                Log.d("Exception", e.toString());
+            }
+            return places;
+        }
+
+        // Executed after the complete execution of doInBackground() method
+        @Override
+        protected void onPostExecute(List<HashMap<String, String>> list) {
+
+            for(int i=0;i<list.size();i++) {
+                MarkerOptions markerOptions = new MarkerOptions();
+                HashMap<String, String> hmPlace = list.get(i);
+                double lat = Double.parseDouble(hmPlace.get("lat"));
+                double lng = Double.parseDouble(hmPlace.get("lng"));
+                String name = hmPlace.get("formatted_address");
+                LatLng latLng = new LatLng(lat, lng);
+                markerOptions.position(latLng);
+                markerOptions.title(name);
+                mMap.addMarker(markerOptions);
+            }
+        }
+    }
 
 }

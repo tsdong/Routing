@@ -30,7 +30,7 @@ public class HttpConnection {
             Log.i("Returning data:", data);
             br.close();
         } catch (Exception e) {
-            Log.d("Exception while reading url", e.toString());
+            Log.d("Exception", e.toString());
         } finally {
             iStream.close();
             urlConnection.disconnect();
