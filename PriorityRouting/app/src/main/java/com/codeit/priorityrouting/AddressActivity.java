@@ -133,7 +133,7 @@ public class AddressActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 String getInput = et.getText().toString();
-                String location = et.getText().toString();
+                String location = et.getText().toString().replace(" ","+");
                 String url = "https://maps.googleapis.com/maps/api/geocode/json?";
                 try {
                     // encoding special characters like space in the user input place
@@ -195,7 +195,7 @@ public class AddressActivity extends ActionBarActivity {
              public void onClick(View v) {
 
                 et = (EditText) findViewById(R.id.get_place);
-                 String location = et.getText().toString();
+                 String location = et.getText().toString().replace(" ","+");
                  String url = "https://maps.googleapis.com/maps/api/geocode/json?";
                 destination = et.getText().toString();
                 destination = destination.replace(" ", "+");
