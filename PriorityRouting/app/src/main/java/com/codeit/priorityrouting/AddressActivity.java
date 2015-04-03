@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -42,13 +43,18 @@ import com.google.android.gms.maps.model.LatLng;
 public class AddressActivity extends ActionBarActivity {
 
     Button btnAdd;
+    CheckBox chkPriority = (CheckBox) findViewById(R.id.chkPriority);
     ArrayList<String> addArray = new ArrayList<String>();
+    ArrayList<String> addArray2 = new ArrayList<String>();
     ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapter2;
     EditText et;
     ListView lv;
     String toBePassed = "";
+    String toBePassed2 = "";
     String destination = "";
     ArrayList<String> Addresses = new ArrayList<String>();
+    ArrayList<String> Addresses2 = new ArrayList<String>();
 
 
 
@@ -91,32 +97,6 @@ public class AddressActivity extends ActionBarActivity {
         lv = (ListView) findViewById(R.id.addressListView);
 
 
-        ////////////
-        //Dialog Box
-        ////////////
-
-/*        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter an Address");
-        builder
-                .setMessage("Enter an address into the 'Enter Address' field and do not click 'Add'. Once address has been entered, click 'Map It'.")
-                .setCancelable(false)
-                .setNeutralButton("Okay", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
-
-        /////////
-        //Create alert dialog
-        /////////
-        AlertDialog alertDialog = builder.create();
-
-        /////////
-        //Show dialog
-        /////////
-        alertDialog.show();
-*/
-
         /////////
         //Buttons
         /////////
@@ -132,16 +112,20 @@ public class AddressActivity extends ActionBarActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getInput = et.getText().toString();
-                String location = et.getText().toString().replace(" ","+");
-                String url = "https://maps.googleapis.com/maps/api/geocode/json?";
-                try {
-                    // encoding special characters like space in the user input place
-                    location = URLEncoder.encode(location, "utf-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
 
+                if(chkPriority.isChecked()) {
+                    ////////High Priority////////
+
+                    String getInput = et.getText().toString();
+                    String location = et.getText().toString().replace(" ", "+");
+                    String url = "https://maps.googleapis.com/maps/api/geocode/json?";
+                    try {
+                        // encoding special characters like space in the user input place
+                        location = URLEncoder.encode(location, "utf-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+/*
                 if(addArray.contains(getInput)){
                     Toast.makeText(getBaseContext(), "Address already exists list", Toast.LENGTH_LONG).show();
                 } else if(getInput == null || getInput.trim().equals("")) {
@@ -149,31 +133,78 @@ public class AddressActivity extends ActionBarActivity {
                 } else{
                     if(toBePassed.equals(""));
                 }
-
-                if (addArray.contains(getInput)) {
-                    Toast.makeText(getBaseContext(), "Address already exists list", Toast.LENGTH_LONG);
-                } else if (getInput == null || getInput.trim().equals("")) {
-                    Toast.makeText(getBaseContext(), "Address entry is empty.", Toast.LENGTH_LONG);
-                } else {
-                    if (toBePassed.equals("")) {
-                        toBePassed = toBePassed + getInput;
-                        //Addresses.add(geocoder.getFromLocationName(getInput,1));
+*/
+                    if (addArray.contains(getInput)) {
+                        Toast.makeText(getBaseContext(), "Address already exists list", Toast.LENGTH_LONG).show();
+                    } else if (getInput == null || getInput.trim().equals("")) {
+                        Toast.makeText(getBaseContext(), "Address entry is empty.", Toast.LENGTH_LONG).show();
                     } else {
-                        toBePassed = toBePassed + "|" + getInput;
+                        if (toBePassed.equals("")) {
+                            toBePassed = toBePassed + getInput;
+                            //Addresses.add(geocoder.getFromLocationName(getInput,1));
+                        } else {
+                            toBePassed = toBePassed + "|" + getInput;
+                        }
+                        String address = "address=" + location;
+
+                        String sensor = "sensor=false";
+
+                        url = url + address + "&" + sensor;
+
+                        Addresses.add(url);
+
+
+                        addArray.add(getInput);
+                        adapter = new ArrayAdapter<String>(AddressActivity.this, android.R.layout.simple_list_item_1, addArray);
+                        lv.setAdapter(adapter);
+                        ((EditText) findViewById(R.id.get_place)).setText("");
                     }
-                    String address = "address=" + location;
+                } else {
+                    ////////Basic Priority////////
 
-                    String sensor = "sensor=false";
+                    String getInput = et.getText().toString();
+                    String location = et.getText().toString().replace(" ", "+");
+                    String url = "https://maps.googleapis.com/maps/api/geocode/json?";
+                    try {
+                        // encoding special characters like space in the user input place
+                        location = URLEncoder.encode(location, "utf-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+/*
+                if(addArray.contains(getInput)){
+                    Toast.makeText(getBaseContext(), "Address already exists list", Toast.LENGTH_LONG).show();
+                } else if(getInput == null || getInput.trim().equals("")) {
+                    Toast.makeText(getBaseContext(), "Address entry is empty.", Toast.LENGTH_LONG).show();
+                } else{
+                    if(toBePassed.equals(""));
+                }
+*/
+                    if (addArray2.contains(getInput)) {
+                        Toast.makeText(getBaseContext(), "Address already exists list", Toast.LENGTH_LONG).show();
+                    } else if (getInput == null || getInput.trim().equals("")) {
+                        Toast.makeText(getBaseContext(), "Address entry is empty.", Toast.LENGTH_LONG).show();
+                    } else {
+                        if (toBePassed2.equals("")) {
+                            toBePassed2 = toBePassed2 + getInput;
+                            //Addresses.add(geocoder.getFromLocationName(getInput,1));
+                        } else {
+                            toBePassed2 = toBePassed2 + "|" + getInput;
+                        }
+                        String address = "address=" + location;
 
-                    url = url + address + "&" + sensor;
+                        String sensor = "sensor=false";
 
-                    Addresses.add(url);
+                        url = url + address + "&" + sensor;
+
+                        Addresses2.add(url);
 
 
-                    addArray.add(getInput);
-                    adapter = new ArrayAdapter<String>(AddressActivity.this, android.R.layout.simple_list_item_1, addArray);
-                    lv.setAdapter(adapter);
-                    ((EditText) findViewById(R.id.get_place)).setText("");
+                        addArray2.add(getInput);
+                        adapter2 = new ArrayAdapter<String>(AddressActivity.this, android.R.layout.simple_list_item_1, addArray2);
+                        lv.setAdapter(adapter2);
+                        ((EditText) findViewById(R.id.get_place)).setText("");
+                    }
                 }
             }
         });
@@ -194,13 +225,14 @@ public class AddressActivity extends ActionBarActivity {
         {
              public void onClick(View v) {
 
-                et = (EditText) findViewById(R.id.get_place);
+                 et = (EditText) findViewById(R.id.get_place);
                  String location = et.getText().toString().replace(" ","+");
                  String url = "https://maps.googleapis.com/maps/api/geocode/json?";
-                destination = et.getText().toString();
-                destination = destination.replace(" ", "+");
+                 destination = et.getText().toString();
+                 destination = destination.replace(" ", "+");
 
-                  toBePassed = toBePassed.replace(" ", "+");
+                 toBePassed = toBePassed.replace(" ", "+");
+                 toBePassed2 = toBePassed2.replace(" ", "+");
 
 
                  String address = "address=" + location;
@@ -210,11 +242,15 @@ public class AddressActivity extends ActionBarActivity {
                  url = url + address + "&" + sensor;
 
                  Addresses.add(url);
-                  Intent i = new Intent(AddressActivity.this, MapsActivity.class);
-                  i.putExtra("desto", destination);
-                  i.putExtra("addr", toBePassed);
+                 Addresses2.add(url);
+
+                 Intent i = new Intent(AddressActivity.this, MapsActivity.class);
+                 i.putExtra("desto", destination);
+                 i.putExtra("addr", toBePassed);
+                 i.putExtra("addr2", toBePassed2);
                  i.putStringArrayListExtra("markers", Addresses);
-                  startActivity(i);
+                 i.putStringArrayListExtra("markers2", Addresses2);
+                 startActivity(i);
 
                   }
             }
