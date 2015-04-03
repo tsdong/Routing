@@ -60,12 +60,8 @@
         android:layout_toLeftOf="@id/btn_add"
         android:layout_alignBottom="@+id/btn_add"
         android:layout_below="@+id/addEntry"
-<<<<<<< HEAD
         android:ems="10"
-        android:text="Enter Place"
-        />
-=======
-        android:ems="10" />
+        android:text="Enter Place" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -74,7 +70,6 @@
         android:text="High Priority"
         android:layout_below="@+id/get_place"
         android:layout_alignRight="@+id/btn_add" />
->>>>>>> origin/dev
 
     <FrameLayout
         android:layout_width="fill_parent"

@@ -201,8 +201,8 @@ public class AddressActivity extends ActionBarActivity {
 
 
                         addArray2.add(getInput);
-                        adapter2 = new ArrayAdapter<String>(AddressActivity.this, android.R.layout.simple_list_item_1, addArray2);
-                        lv.setAdapter(adapter2);
+                        adapter = new ArrayAdapter<String>(AddressActivity.this, android.R.layout.simple_list_item_1, addArray2);
+                        lv.setAdapter(adapter);
                         ((EditText) findViewById(R.id.get_place)).setText("");
                     }
                 }
