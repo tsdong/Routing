@@ -19,7 +19,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/login"
         android:textSize="40sp"
-        android:textColor="@color/gray86"
+        android:textColor="@color/teal"
         android:id="@+id/loginView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -54,6 +54,7 @@
                 android:inputType="textPassword"
                 android:textColor="@color/teal"
                 android:textColorHint="@color/teal"
+                android:backgroundTint="@color/teal"
                 android:maxLines="1"
                 android:singleLine="true" />
 
@@ -65,7 +66,8 @@
                 android:layout_marginTop="16dp"
                 android:textColor="@color/teal"
                 android:text="@string/action_sign_in_short"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <Button
                 android:id="@+id/register_button"

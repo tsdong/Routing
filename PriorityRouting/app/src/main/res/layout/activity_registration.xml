@@ -65,7 +65,8 @@
         android:text="@string/btn_submit"
         android:textStyle="bold"
         android:layout_below="@+id/confPassword"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/teal"/>
 
     <Button
         android:id="@+id/email_sign_in_button_2"
@@ -75,7 +76,8 @@
         android:text="@string/btn_cancel"
         android:textStyle="bold"
         android:layout_below="@+id/email_sign_in_button"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/teal"/>
 
     <TextView
         android:id="@+id/registerView"
@@ -83,7 +85,7 @@
         android:layout_height="wrap_content"
         android:text="@string/reg_title"
         android:textSize="40sp"
-        android:textColor="@color/gray86"
+        android:textColor="@color/teal"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 

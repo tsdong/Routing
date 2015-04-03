@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/addr_title"
         android:textSize="40sp"
-        android:textColor="@color/gray86"
+        android:textColor="@color/teal"
         android:id="@+id/addEntry"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -61,7 +61,10 @@
         android:layout_alignBottom="@+id/btn_add"
         android:layout_below="@+id/addEntry"
         android:ems="10"
-        android:text="Enter Place" />
+        android:text="Enter Place"
+        android:backgroundTint="@color/teal"
+        android:maxLines="1"
+        android:singleLine="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -69,7 +72,8 @@
         android:id="@+id/chkPriority"
         android:text="High Priority"
         android:layout_below="@+id/get_place"
-        android:layout_alignRight="@+id/btn_add" />
+        android:layout_alignRight="@+id/btn_add"
+        android:textColor="@color/teal"/>
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -77,14 +81,14 @@
         android:layout_above="@+id/btn_route"
         android:layout_below="@+id/chkPriority"
         android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true" >
+        android:layout_alignParentLeft="true">
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:divider="#0099CC"
             android:dividerHeight="4px"
-            android:id="@+id/addressListView" />
+            android:id="@+id/addressListView"/>
      </FrameLayout>
 
 </RelativeLayout>
