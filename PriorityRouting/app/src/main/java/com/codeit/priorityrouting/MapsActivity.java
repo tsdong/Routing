@@ -83,10 +83,10 @@ public class MapsActivity extends FragmentActivity {
 
 //        setUpMapIfNeeded();
         String userInput = getIntent().getExtras().getString("addr");
-//        String addrCoords = getIntent().getExtras().getString("latlng");
+        String userInput2 = getIntent().getExtras().getString("addr2");
 
         Toast.makeText(this, userInput.replace("+"," "), Toast.LENGTH_LONG).show();
-//        Toast.makeText(this, addrCoords, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, userInput2.replace("+", " "), Toast.LENGTH_LONG).show();
 
 
         String url = getMapsApiDirectionsUrl(Origin);

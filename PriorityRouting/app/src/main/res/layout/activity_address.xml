@@ -60,15 +60,27 @@
         android:layout_toLeftOf="@id/btn_add"
         android:layout_alignBottom="@+id/btn_add"
         android:layout_below="@+id/addEntry"
+<<<<<<< HEAD
         android:ems="10"
         android:text="Enter Place"
         />
+=======
+        android:ems="10" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chkPriority"
+        android:text="High Priority"
+        android:layout_below="@+id/get_place"
+        android:layout_alignRight="@+id/btn_add" />
+>>>>>>> origin/dev
 
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/btn_route"
-        android:layout_below="@+id/get_place"
+        android:layout_below="@+id/chkPriority"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true" >
         <ListView
