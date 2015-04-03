@@ -61,6 +61,7 @@
         android:layout_alignBottom="@+id/btn_add"
         android:layout_below="@+id/addEntry"
         android:ems="10"
+        android:text="Enter Place"
         />
 
     <FrameLayout

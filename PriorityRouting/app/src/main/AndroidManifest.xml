@@ -3,7 +3,7 @@
     package="com.codeit.priorityrouting" >
 
 
-    <uses-sdk android:minSdkVersion="7"  android:targetSdkVersion="18" />
+    <uses-sdk android:minSdkVersion="8"  android:targetSdkVersion="21" />
 
 
 
@@ -42,7 +42,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".SplashActivity"
+            android:name="com.codeit.priorityrouting.GooglePlacesAutocompleteActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden|adjustPan">

@@ -37,7 +37,7 @@ public class GooglePlacesAutocompleteActivity extends Activity implements OnItem
     private static final String OUT_JSON = "/json";
 
     //private static final String API_KEY = "------your api key here -------";
-    private static final String API_KEY = "AIzaSyC7YEEJdyGuC0woH3U4m7YwNj7l-9U7hKw";
+    private static final String API_KEY = "AIzaSyCaB8ro6K2_JhK0654fzm4g6W8vzQG3qns";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class GooglePlacesAutocompleteActivity extends Activity implements OnItem
         try {
             StringBuilder sb = new StringBuilder(PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON);
             sb.append("?key=" + API_KEY);
-            sb.append("&components=country:gr");
+            sb.append("&types=address");
             sb.append("&input=" + URLEncoder.encode(input, "utf8"));
 
             URL url = new URL(sb.toString());
