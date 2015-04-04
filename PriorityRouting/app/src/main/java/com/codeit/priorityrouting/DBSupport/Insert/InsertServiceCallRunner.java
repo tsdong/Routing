@@ -28,7 +28,7 @@ public class InsertServiceCallRunner extends AsyncTask<String,String,String> {
         String insertJson=params[0];
         System.out.println("I am going to insert: " + insertJson);
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-        String result = restTemplate.postForObject("http://pigppo.com:9001/priorityRouting/insert", insertJson, String.class, "Android");
+        String result = restTemplate.postForObject("http://pigppo.com:6390/priorityRouting/insert", insertJson, String.class, "Android");
 
         return result;
     }
