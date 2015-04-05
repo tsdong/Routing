@@ -30,7 +30,7 @@ public class SelectToVerifyLogIn extends AsyncTask<String,String,String> {
 
         String query = "select email, password from hao.user_info where email = " + "'" + email + "'";
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-        String result = restTemplate.postForObject("http://pigppo.com:6390/priorityRouting/select", query,String.class,"Android");
+        String result = restTemplate.postForObject("http://pigppo.com:9001/priorityRouting/select", query,String.class,"Android");
 
         return result;
     }
